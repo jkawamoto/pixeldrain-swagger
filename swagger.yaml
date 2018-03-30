@@ -23,6 +23,7 @@ paths:
       - file
       summary: Upload a file.
       description: Upload a file.
+      operationId: uploadFile
       consumes:
       - multipart/form-data
       parameters:
@@ -73,6 +74,7 @@ paths:
       summary: Download a file.
       description: >
         Returns the full file associated with the ID. Supports byte range requests.
+      operationId: downloadFile
       produces:
       - application/octet-stream
       - application/json
@@ -96,6 +98,7 @@ paths:
       - file
       summary: Deletes a file.
       description: Deletes a file. Only works when the users owns the file.
+      operationId: deleteFile
       parameters:
       - name: id
         type: string
@@ -163,6 +166,7 @@ paths:
         Returns information about one or more files.
         You can also put a comma separated list of file IDs in the URL
         and it will return an array of file info, instead of a single object.
+      operationId: getFileInfo
       parameters:
       - name: id
         type: string
@@ -254,6 +258,7 @@ paths:
       - list
       summary: Creates a list of files that can be viewed together on the file viewer page.
       description: Creates a list of files that can be viewed together on the file viewer page.
+      operationId: createFileList
       parameters:
       - name: list
         in: body
@@ -322,6 +327,7 @@ paths:
       - list
       summary: Returns information about a file list and the files in it.
       description: Returns information about a file list and the files in it.
+      operationId: getFileList
       parameters:
       - name: id
         type: string
