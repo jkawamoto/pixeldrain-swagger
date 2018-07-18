@@ -41,10 +41,10 @@ paths:
         type: string
         in: formData
         description: Description of the file
-        default: Pixeldrain File  
+        default: Pixeldrain File
       responses:
-        200:
-          description: ID of the newly uploaded file
+        201:
+          description: File is uploaded
           schema:
             type: object
             properties:
@@ -123,15 +123,15 @@ paths:
         401:
           description: Unauthorized
           schema:
-            $ref: "#/definitions/StandardError"          
+            $ref: "#/definitions/StandardError"
         403:
           description: Forbidden
           schema:
-            $ref: "#/definitions/StandardError"          
+            $ref: "#/definitions/StandardError"
         404:
           description: Not Found
           schema:
-            $ref: "#/definitions/StandardError"        
+            $ref: "#/definitions/StandardError"
   "/file/{id}/download":
     get:
       tags:
@@ -139,7 +139,7 @@ paths:
       summary: Download a file.
       description: >
         Same as GET /file/{id}, but with File Transfer HTTP headers.
-        Will trigger a save file dialog when opened in a web browser. 
+        Will trigger a save file dialog when opened in a web browser.
         Also supports byte range requests.
       produces:
       - application/octet-stream
@@ -156,7 +156,7 @@ paths:
         default:
           description: Error Response
           schema:
-            $ref: "#/definitions/StandardError"        
+            $ref: "#/definitions/StandardError"
   "/file/{id}/info":
     get:
       tags:
@@ -225,7 +225,7 @@ paths:
         404:
           description: Not Found
           schema:
-            $ref: "#/definitions/StandardError"                  
+            $ref: "#/definitions/StandardError"
   "/file/{id}/thumbnail":
     get:
       tags:
@@ -251,9 +251,9 @@ paths:
         default:
           description: Error Response
           schema:
-            $ref: "#/definitions/StandardError"        
+            $ref: "#/definitions/StandardError"
   /list:
-    post: 
+    post:
       tags:
       - list
       summary: Creates a list of files that can be viewed together on the file viewer page.
@@ -264,7 +264,7 @@ paths:
         in: body
         required: true
         description: >
-          POST body should be a JSON object, example below. 
+          POST body should be a JSON object, example below.
           A list can contain maximally 5000 files.
           If you try to add more the request will fail.
         schema:
@@ -301,8 +301,8 @@ paths:
               - id: 123abc
                 description: The week went by so quickly, here's a photo from the plane back
       responses:
-        200:
-          description: OK
+        201:
+          description: List is created
           schema:
             type: object
             properties:
@@ -316,11 +316,11 @@ paths:
         413:
           description: Payload too large
           schema:
-            $ref: "#/definitions/StandardError"                
+            $ref: "#/definitions/StandardError"
         422:
           description: Unprocessable Entity
           schema:
-            $ref: "#/definitions/StandardError"        
+            $ref: "#/definitions/StandardError"
   "/list/{id}":
     get:
       tags:
@@ -381,7 +381,7 @@ paths:
         404:
           description: Not Found
           schema:
-            $ref: "#/definitions/StandardError"                              
+            $ref: "#/definitions/StandardError"
 definitions:
   StandardError:
     required:

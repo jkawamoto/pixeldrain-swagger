@@ -9,8 +9,7 @@
   "schemes": [
     "https"
   ],
-  "tags": [
-    {
+  "tags": [{
       "name": "file",
       "description": "File Methods"
     },
@@ -38,8 +37,7 @@
         "consumes": [
           "multipart/form-data"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "file",
             "type": "file",
             "in": "formData",
@@ -62,8 +60,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ID of the newly uploaded file",
+          "201": {
+            "description": "File is uploaded",
             "schema": {
               "type": "object",
               "properties": {
@@ -112,15 +110,13 @@
           "application/octet-stream",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID of the file to request"
-          }
-        ],
+        "parameters": [{
+          "name": "id",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "ID of the file to request"
+        }],
         "responses": {
           "200": {
             "description": "A file output stream.",
@@ -143,15 +139,13 @@
         "summary": "Deletes a file.",
         "description": "Deletes a file. Only works when the users owns the file.",
         "operationId": "deleteFile",
-        "parameters": [
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID of the file to request"
-          }
-        ],
+        "parameters": [{
+          "name": "id",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "ID of the file to request"
+        }],
         "responses": {
           "200": {
             "description": "OK",
@@ -205,15 +199,13 @@
           "application/octet-stream",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID of the file to request"
-          }
-        ],
+        "parameters": [{
+          "name": "id",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "ID of the file to request"
+        }],
         "responses": {
           "200": {
             "description": "A file output stream."
@@ -235,15 +227,13 @@
         "summary": "Retrieve information of a file.",
         "description": "Returns information about one or more files. You can also put a comma separated list of file IDs in the URL and it will return an array of file info, instead of a single object.\n",
         "operationId": "getFileInfo",
-        "parameters": [
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID(s) of the file"
-          }
-        ],
+        "parameters": [{
+          "name": "id",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "ID(s) of the file"
+        }],
         "responses": {
           "200": {
             "description": "OK",
@@ -327,15 +317,13 @@
           "image/png",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID of the file to get a thumbnail for"
-          }
-        ],
+        "parameters": [{
+          "name": "id",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "ID of the file to get a thumbnail for"
+        }],
         "responses": {
           "200": {
             "description": "A PNG image of 100*100 px."
@@ -357,65 +345,62 @@
         "summary": "Creates a list of files that can be viewed together on the file viewer page.",
         "description": "Creates a list of files that can be viewed together on the file viewer page.",
         "operationId": "createFileList",
-        "parameters": [
-          {
-            "name": "list",
-            "in": "body",
-            "required": true,
-            "description": "POST body should be a JSON object, example below.  A list can contain maximally 5000 files. If you try to add more the request will fail.\n",
-            "schema": {
-              "type": "object",
-              "required": [
-                "title",
-                "files"
-              ],
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "description": "Title of the list.",
-                  "example": "My beautiful photos"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Description of the list.",
-                  "example": "An album of photos from my vacation in Austria"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "ID of the file",
-                        "example": "abc123"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Description of the file",
-                        "example": "First photo of the week, such a beautiful valley"
-                      }
-                    }
-                  },
-                  "description": "Ordered array of files to add to the list",
-                  "example": [
-                    {
-                      "id": "abc123",
-                      "description": "First photo of the week, such a beautiful valley"
+        "parameters": [{
+          "name": "list",
+          "in": "body",
+          "required": true,
+          "description": "POST body should be a JSON object, example below.  A list can contain maximally 5000 files. If you try to add more the request will fail.\n",
+          "schema": {
+            "type": "object",
+            "required": [
+              "title",
+              "files"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Title of the list.",
+                "example": "My beautiful photos"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the list.",
+                "example": "An album of photos from my vacation in Austria"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "ID of the file",
+                      "example": "abc123"
                     },
-                    {
-                      "id": "123abc",
-                      "description": "The week went by so quickly, here's a photo from the plane back"
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the file",
+                      "example": "First photo of the week, such a beautiful valley"
                     }
-                  ]
-                }
+                  }
+                },
+                "description": "Ordered array of files to add to the list",
+                "example": [{
+                    "id": "abc123",
+                    "description": "First photo of the week, such a beautiful valley"
+                  },
+                  {
+                    "id": "123abc",
+                    "description": "The week went by so quickly, here's a photo from the plane back"
+                  }
+                ]
               }
             }
           }
-        ],
+        }],
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "List is created",
             "schema": {
               "type": "object",
               "properties": {
@@ -454,15 +439,13 @@
         "summary": "Returns information about a file list and the files in it.",
         "description": "Returns information about a file list and the files in it.",
         "operationId": "getFileList",
-        "parameters": [
-          {
-            "name": "id",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "description": "ID of the list"
-          }
-        ],
+        "parameters": [{
+          "name": "id",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "ID of the list"
+        }],
         "responses": {
           "200": {
             "description": "OK",
