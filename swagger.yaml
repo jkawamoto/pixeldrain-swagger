@@ -132,31 +132,6 @@ paths:
           description: Not Found
           schema:
             $ref: "#/definitions/StandardError"
-  "/file/{id}/download":
-    get:
-      tags:
-      - file
-      summary: Download a file.
-      description: >
-        Same as GET /file/{id}, but with File Transfer HTTP headers.
-        Will trigger a save file dialog when opened in a web browser.
-        Also supports byte range requests.
-      produces:
-      - application/octet-stream
-      - application/json
-      parameters:
-      - name: id
-        type: string
-        in: path
-        required: true
-        description: ID of the file to request
-      responses:
-        200:
-          description: A file output stream.
-        default:
-          description: Error Response
-          schema:
-            $ref: "#/definitions/StandardError"
   "/file/{id}/info":
     get:
       tags:
