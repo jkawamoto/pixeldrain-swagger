@@ -191,19 +191,23 @@ paths:
                 description: Name of the file
                 example: screenshot.png
               date_upload:
-                type: number
+                type: string
+                format: date-time
                 description: Timestamp of uploaded time
-                example: 1485894987
+                example: "2019-01-15T17:13:43Z"
               date_last_view:
-                type: number
+                type: string
+                format: date-time
                 description: Timestamp of last viewed time
-                example: 1485894987
+                example: "2019-01-15T17:13:43Z"
               file_size:
-                type: number
+                type: integer
+                format: int64
                 description: Size of the file in Bytes
                 example: 5694837
               views:
-                type: number
+                type: integer
+                format: int64
                 description: Amount of unique file views
                 example: 1234
               mime_type:
