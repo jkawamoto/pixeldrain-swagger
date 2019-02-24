@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   title: PixelDrain
   version: public beta
-host: sia.pixeldrain.com
+host: pixeldrain.com
 basePath: /api
 schemes:
 - https
@@ -55,16 +55,8 @@ paths:
                 type: string
                 description: ID of the newly uploaded file
                 example: abc123
-        413:
-          description: Payload Too Large
-          schema:
-            $ref: "#/definitions/StandardError"
-        422:
-          description: Unprocessable Entity
-          schema:
-            $ref: "#/definitions/StandardError"
-        500:
-          description: Internal Server Error
+        default:
+          description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
   "/file/{id}":
@@ -120,16 +112,8 @@ paths:
               message:
                 type: string
                 example: The file has been deleted.
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/StandardError"
-        403:
-          description: Forbidden
-          schema:
-            $ref: "#/definitions/StandardError"
-        404:
-          description: Not Found
+        default:
+          description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
   "/file/{id}/info":
@@ -201,8 +185,8 @@ paths:
                 type: string
                 description: Link to a thumbnail of this file
                 example: http://pixeldra.in/api/thumbnail/123abc
-        404:
-          description: Not Found
+        default:
+          description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
   "/file/{id}/thumbnail":
@@ -292,12 +276,8 @@ paths:
                 type: string
                 description: ID of the newly created list
                 example: yay137
-        413:
-          description: Payload too large
-          schema:
-            $ref: "#/definitions/StandardError"
-        422:
-          description: Unprocessable Entity
+        default:
+          description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
   "/list/{id}":
@@ -357,8 +337,8 @@ paths:
                     list_description:
                       type: string
                       example: ""
-        404:
-          description: Not Found
+        default:
+          description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
 definitions:
