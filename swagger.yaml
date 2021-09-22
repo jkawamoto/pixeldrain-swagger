@@ -15,7 +15,6 @@ consumes:
 - application/json
 produces:
 - application/json
-- text/plain
 paths:
   /file:
     post:
@@ -69,7 +68,6 @@ paths:
       operationId: downloadFile
       produces:
       - application/octet-stream
-      - application/json
       parameters:
       - name: id
         type: string
@@ -201,7 +199,6 @@ paths:
         if not it will be a generic mime type icon.
       produces:
       - image/png
-      - application/json
       parameters:
       - name: id
         type: string
