@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: PixelDrain API definition
+  title: Pixeldrain API
   version: 2021-09-22
 host: pixeldrain.com
 basePath: /api
