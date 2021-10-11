@@ -216,6 +216,7 @@ paths:
         The thumbnail is always 100*100 px.
         If the source file is parsable by imagemagick the thumbnail will be generated from the file,
         if not it will be a generic mime type icon.
+      operationId: getFileThumbnail
       produces:
       - image/png
       parameters:
@@ -224,9 +225,20 @@ paths:
         in: path
         required: true
         description: ID of the file to get a thumbnail for
+      - name: width
+        type: integer
+        in: query
+        description: Width of the thumbnail image
+      - name: height
+        type: integer
+        in: query
+        description: Height of the thumbnail image
       responses:
         200:
-          description: A PNG image of 100*100 px.
+          description: >
+            A PNG image if a thumbnail can be generated.
+            If a thumbnail cannot be generated you will get a 301 redirect to an image representing the type of the
+            file.
         default:
           description: Error Response
           schema:
