@@ -26,7 +26,10 @@ paths:
       tags:
       - file
       summary: Upload a file.
-      description: Upload a file.
+      description: >
+        Upload a file. I recommend that you use the PUT API instead of the POST API.
+        It’s easier to use and the multipart encoding of the POST API can cause performance issues in certain
+        environments.
       operationId: uploadFile
       consumes:
       - multipart/form-data
@@ -35,17 +38,17 @@ paths:
         type: file
         in: formData
         required: true
-        description: Multipart file to upload
+        description: File to upload
       - name: name
         type: string
         in: formData
         description: Name of the file to upload
-        default: Name of file param
-      - name: description
-        type: string
+        default: multipart file name
+      - name: anonymous
+        type: boolean
         in: formData
-        description: Description of the file
-        default: Pixeldrain File
+        description: File is not linked to user if true
+        default: false
       responses:
         201:
           description: File is uploaded
