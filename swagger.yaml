@@ -153,51 +153,7 @@ paths:
         200:
           description: OK
           schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: true
-              id:
-                type: string
-                description: ID of the newly uploaded file
-                example: abc123
-              name:
-                type: string
-                description: Name of the file
-                example: screenshot.png
-              date_upload:
-                type: string
-                format: date-time
-                description: Timestamp of uploaded time
-                example: "2019-01-15T17:13:43Z"
-              date_last_view:
-                type: string
-                format: date-time
-                description: Timestamp of last viewed time
-                example: "2019-01-15T17:13:43Z"
-              size:
-                type: integer
-                format: int64
-                description: Size of the file in Bytes
-                example: 5694837
-              views:
-                type: integer
-                format: int64
-                description: Amount of unique file views
-                example: 1234
-              bandwidth_used:
-                type: integer
-                format: int64
-                description: How much bandwidth this file used
-              mime_type:
-                type: string
-                description: MIME type of the file
-                example: image/png
-              thumbnail_href:
-                type: string
-                description: Link to a thumbnail of this file
-                example: /file/1234abcd/thumbnail
+            $ref: "#/definitions/FileInfo"
         default:
           description: Error Response
           schema:
@@ -264,10 +220,11 @@ paths:
               type: string
               description: Title of the list.
               example: My beautiful photos
-            description:
-              type: string
-              description: Description of the list.
-              example: An album of photos from my vacation in Austria
+            anonymous:
+              type: boolean
+              description: If true this list will not be linked to your user account.
+              default: false
+              example: true
             files:
               type: array
               items:
@@ -338,34 +295,54 @@ paths:
               files:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    detail_href:
-                      type: string
-                      example: /file/_SqVWi/info
-                    id:
-                      type: string
-                      example: _SqVWi
-                    file_name:
-                      type: string
-                      example: 01 Holy Wars... The Punishment Due.mp3
-                    description:
-                      type: string
-                      example: ""
-                    date_created:
-                      type: number
-                      example: 1513033304
-                    date_last_view:
-                      type: number
-                      example: 1513033304
-                    list_description:
-                      type: string
-                      example: ""
+                  $ref: "#/definitions/FileInfo"
         default:
           description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
 definitions:
+  FileInfo:
+    properties:
+      id:
+        type: string
+        description: ID of the newly uploaded file
+        example: abc123
+      name:
+        type: string
+        description: Name of the file
+        example: screenshot.png
+      date_upload:
+        type: string
+        format: date-time
+        description: Timestamp of uploaded time
+        example: "2019-01-15T17:13:43Z"
+      date_last_view:
+        type: string
+        format: date-time
+        description: Timestamp of last viewed time
+        example: "2019-01-15T17:13:43Z"
+      size:
+        type: integer
+        format: int64
+        description: Size of the file in Bytes
+        example: 5694837
+      views:
+        type: integer
+        format: int64
+        description: Amount of unique file views
+        example: 1234
+      bandwidth_used:
+        type: integer
+        format: int64
+        description: How much bandwidth this file used
+      mime_type:
+        type: string
+        description: MIME type of the file
+        example: image/png
+      thumbnail_href:
+        type: string
+        description: Link to a thumbnail of this file
+        example: /file/1234abcd/thumbnail
   StandardError:
     required:
     - success
