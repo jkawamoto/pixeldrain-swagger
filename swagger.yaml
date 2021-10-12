@@ -186,22 +186,18 @@ paths:
                 format: int64
                 description: Amount of unique file views
                 example: 1234
+              bandwidth_used:
+                type: integer
+                format: int64
+                description: How much bandwidth this file used
               mime_type:
                 type: string
                 description: MIME type of the file
                 example: image/png
-              description:
-                type: string
-                description: Description of the file
-                example: File description
-              mime_image:
-                type: string
-                description: Image associated with the mime type
-                example: http://pixeldra.in/res/img/mime/image-png.png
-              thumbnail:
+              thumbnail_href:
                 type: string
                 description: Link to a thumbnail of this file
-                example: http://pixeldra.in/api/thumbnail/123abc
+                example: /file/1234abcd/thumbnail
         default:
           description: Error Response
           schema:
