@@ -1,30 +1,32 @@
 swagger: "2.0"
 info:
   title: Pixeldrain API
-  version: 2021-09-22
+  version: 2021-10-12
 host: pixeldrain.com
 basePath: /api
 schemes:
-- https
+  - https
 tags:
-- name: file
-  description: File Methods
-- name: list
-  description: List Methods
+  - name: file
+    description: File Methods
+  - name: list
+    description: List Methods
+  - name: user
+    description: User Methods
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 securityDefinitions:
   basicAuth:
     type: basic
 security:
-  - basicAuth: []
+  - basicAuth: [ ]
 paths:
   /file:
     post:
       tags:
-      - file
+        - file
       summary: Upload a file.
       description: >
         Upload a file. I recommend that you use the PUT API instead of the POST API.
@@ -32,23 +34,23 @@ paths:
         environments.
       operationId: uploadFile
       consumes:
-      - multipart/form-data
+        - multipart/form-data
       parameters:
-      - name: file
-        type: file
-        in: formData
-        required: true
-        description: File to upload
-      - name: name
-        type: string
-        in: formData
-        description: Name of the file to upload
-        default: multipart file name
-      - name: anonymous
-        type: boolean
-        in: formData
-        description: File is not linked to user if true
-        default: false
+        - name: file
+          type: file
+          in: formData
+          required: true
+          description: File to upload
+        - name: name
+          type: string
+          in: formData
+          description: Name of the file to upload
+          default: multipart file name
+        - name: anonymous
+          type: boolean
+          in: formData
+          description: File is not linked to user if true
+          default: false
       responses:
         201:
           description: File is uploaded
@@ -69,7 +71,7 @@ paths:
   "/file/{id}":
     get:
       tags:
-      - file
+        - file
       summary: Download a file.
       description: >
         Returns the full file associated with the ID. Supports byte range requests.
@@ -86,13 +88,13 @@ paths:
         If a virus has been detected in a file the user will also have to fill in a captcha to download it.
       operationId: downloadFile
       produces:
-      - application/octet-stream
+        - application/octet-stream
       parameters:
-      - name: id
-        type: string
-        in: path
-        required: true
-        description: ID of the file to request
+        - name: id
+          type: string
+          in: path
+          required: true
+          description: ID of the file to request
       responses:
         200:
           description: A file output stream.
@@ -104,16 +106,16 @@ paths:
             $ref: "#/definitions/StandardError"
     delete:
       tags:
-      - file
+        - file
       summary: Deletes a file.
       description: Deletes a file. Only works when the users owns the file.
       operationId: deleteFile
       parameters:
-      - name: id
-        type: string
-        in: path
-        required: true
-        description: ID of the file to request
+        - name: id
+          type: string
+          in: path
+          required: true
+          description: ID of the file to request
       responses:
         200:
           description: OK
@@ -136,7 +138,7 @@ paths:
   "/file/{id}/info":
     get:
       tags:
-      - file
+        - file
       summary: Retrieve information of a file.
       description: >
         Returns information about one or more files.
@@ -144,11 +146,11 @@ paths:
         and it will return an array of file info, instead of a single object.
       operationId: getFileInfo
       parameters:
-      - name: id
-        type: string
-        in: path
-        required: true
-        description: ID(s) of the file
+        - name: id
+          type: string
+          in: path
+          required: true
+          description: ID(s) of the file
       responses:
         200:
           description: OK
@@ -161,7 +163,7 @@ paths:
   "/file/{id}/thumbnail":
     get:
       tags:
-      - file
+        - file
       summary: Get a thumbnail image representing the file
       description: >
         Returns a PNG thumbnail image representing the file.
@@ -170,21 +172,21 @@ paths:
         if not it will be a generic mime type icon.
       operationId: getFileThumbnail
       produces:
-      - image/png
+        - image/png
       parameters:
-      - name: id
-        type: string
-        in: path
-        required: true
-        description: ID of the file to get a thumbnail for
-      - name: width
-        type: integer
-        in: query
-        description: Width of the thumbnail image
-      - name: height
-        type: integer
-        in: query
-        description: Height of the thumbnail image
+        - name: id
+          type: string
+          in: path
+          required: true
+          description: ID of the file to get a thumbnail for
+        - name: width
+          type: integer
+          in: query
+          description: Width of the thumbnail image
+        - name: height
+          type: integer
+          in: query
+          description: Height of the thumbnail image
       responses:
         200:
           description: >
@@ -198,52 +200,54 @@ paths:
   /list:
     post:
       tags:
-      - list
+        - list
       summary: Creates a list of files that can be viewed together on the file viewer page.
       description: Creates a list of files that can be viewed together on the file viewer page.
       operationId: createFileList
       parameters:
-      - name: list
-        in: body
-        required: true
-        description: >
-          POST body should be a JSON object, example below.
-          A list can contain maximally 5000 files.
-          If you try to add more the request will fail.
-        schema:
-          type: object
-          required:
-          - title
-          - files
-          properties:
-            title:
-              type: string
-              description: Title of the list.
-              example: My beautiful photos
-            anonymous:
-              type: boolean
-              description: If true this list will not be linked to your user account.
-              default: false
-              example: true
-            files:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: ID of the file
-                    example: abc123
-                  description:
-                    type: string
-                    description: Description of the file
-                    example: First photo of the week, such a beautiful valley
-              description: Ordered array of files to add to the list
-              example:
-              - id: abc123
-                description: First photo of the week, such a beautiful valley
-              - id: 123abc
-                description: The week went by so quickly, here's a photo from the plane back
+        - name: list
+          in: body
+          required: true
+          description: >
+            POST body should be a JSON object, example below.
+            A list can contain maximally 5000 files.
+            If you try to add more the request will fail.
+          schema:
+            type: object
+            required:
+              - files
+            properties:
+              title:
+                type: string
+                description: Title of the list.
+                default: Pixeldrain List
+                example: My beautiful photos
+              anonymous:
+                type: boolean
+                description: If true this list will not be linked to your user account.
+                default: false
+                example: true
+              files:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - id
+                  properties:
+                    id:
+                      type: string
+                      description: ID of the file
+                      example: abc123
+                    description:
+                      type: string
+                      description: Description of the file
+                      example: First photo of the week, such a beautiful valley
+                description: Ordered array of files to add to the list
+                example:
+                  - id: abc123
+                    description: First photo of the week, such a beautiful valley
+                  - id: 123abc
+                    description: The week went by so quickly, here's a photo from the plane back
       responses:
         201:
           description: List is created
@@ -264,16 +268,16 @@ paths:
   "/list/{id}":
     get:
       tags:
-      - list
+        - list
       summary: Returns information about a file list and the files in it.
       description: Returns information about a file list and the files in it.
       operationId: getFileList
       parameters:
-      - name: id
-        type: string
-        in: path
-        required: true
-        description: ID of the list
+        - name: id
+          type: string
+          in: path
+          required: true
+          description: ID of the list
       responses:
         200:
           description: OK
@@ -300,8 +304,52 @@ paths:
           description: Error Response
           schema:
             $ref: "#/definitions/StandardError"
+  "/user/files":
+    get:
+      tags:
+        - user
+      summary: Returns a list of uploaded files.
+      description: Returns a list of uploaded files..
+      operationId: listFiles
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              files:
+                type: array
+                items:
+                  $ref: "#/definitions/FileInfo"
+        default:
+          description: Error Response
+          schema:
+            $ref: "#/definitions/StandardError"
+  "/user/lists":
+    get:
+      tags:
+        - user
+      summary: Returns file lists.
+      description: Returns file lists.
+      operationId: listFileLists
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              lists:
+                type: array
+                items:
+                  $ref: "#/definitions/ListInfo"
+        default:
+          description: Error Response
+          schema:
+            $ref: "#/definitions/StandardError"
 definitions:
   FileInfo:
+    required:
+      - id
     properties:
       id:
         type: string
@@ -343,11 +391,34 @@ definitions:
         type: string
         description: Link to a thumbnail of this file
         example: /file/1234abcd/thumbnail
+  ListInfo:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: ID of the newly uploaded file
+        example: abc123
+      title:
+        type: string
+        description: Title of the list.
+        default: Pixeldrain List
+        example: My beautiful photos
+      date_created:
+        type: string
+        format: date-time
+        description: Timestamp of creation time
+        example: "2019-01-15T17:13:43Z"
+      file_count:
+        type: integer
+        format: int64
+        description: The number of files in the list
+        example: 1234
   StandardError:
     required:
-    - success
-    - value
-    - message
+      - success
+      - value
+      - message
     properties:
       success:
         type: boolean
